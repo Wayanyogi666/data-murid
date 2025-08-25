@@ -14,7 +14,7 @@
         }
 
         body {
-            background-color: #f0f8ff; 
+            background-color: #f0f8ff;  
             display: flex;
             justify-content: center;
             align-items: center;
@@ -32,6 +32,7 @@
             max-height: 95vh;
             overflow-y: auto;
             text-align: center;
+            transition: all 0.5s ease-in-out;
         }
 
         .header-logo {
@@ -92,155 +93,226 @@
             background-color: #ddd;
             margin: 25px 0;
         }
+
+        /* --- STYLE BARU UNTUK PESAN TERIMA KASIH --- */
+        #thankYouMessage {
+            display: none; /* Sembunyikan secara default */
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .thank-you-icon {
+            color: #28a745;
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+        #thankYouMessage h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        #thankYouMessage p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
     </style>
 </head>
 <body>
 
     <div class="container">
         
-        <img src="https://lh3.googleusercontent.com/d/1s6k8X_7RdGseH26wZ_WlAjZyQL_BIsxo" alt="Logo Sekolah" class="header-logo">
-
-        <h1>Pendataan Murid Kelas 6 STUPA</h1>
-        
-        <form action="https://script.google.com/macros/s/AKfycbx8F3ZD_xhzhPNfJKVEDFRDv61H9DdVCMPC6mzLNLkvWZrKbRPo2PZhzZtRmTUP2rYP/exec" method="POST">
+        <div id="form-container">
+            <img src="https://lh3.googleusercontent.com/d/1s6k8X_7RdGseH26wZ_WlAjZyQL_BIsxo" alt="Logo Sekolah" class="header-logo">
+            <h1>Pendataan Murid Kelas 6 STUPA</h1>
             
-            <div class="form-group">
-                <label for="namaLengkap">1. Nama Lengkap</label>
-                <input type="text" id="namaLengkap" name="Nama Lengkap" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="nik">2. NIK (Nomor Induk Kependudukan)</label>
-                <input type="number" id="nik" name="NIK" required>
-            </div>
+            <form id="studentForm" action="https://script.google.com/macros/s/AKfycbx8F3ZD_xhzhPNfJKVEDFRDv61H9DdVCMPC6mzLNLkvWZrKbRPo2PZhzZtRmTUP2rYP/exec" method="POST">
+                
+                <div class="form-group">
+                    <label for="namaLengkap">1. Nama Lengkap</label>
+                    <input type="text" id="namaLengkap" name="Nama Lengkap" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="nik">2. NIK (Nomor Induk Kependudukan)</label>
+                    <input type="number" id="nik" name="NIK" required>
+                </div>
 
-            <div class="form-group">
-                <label for="nomorKK">3. Nomor KK (Kartu Keluarga)</label>
-                <input type="number" id="nomorKK" name="Nomor KK" required>
-            </div>
+                <div class="form-group">
+                    <label for="nomorKK">3. Nomor KK (Kartu Keluarga)</label>
+                    <input type="number" id="nomorKK" name="Nomor KK" required>
+                </div>
 
-            <div class="form-group">
-                <label for="kelas">4. Kelas</label>
-                <select id="kelas" name="Kelas" required>
-                    <option value="" disabled selected>-- Pilih Kelas --</option>
-                    <option value="6A">Kelas 6A</option>
-                    <option value="6B">Kelas 6B</option>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="kelas">4. Kelas</label>
+                    <select id="kelas" name="Kelas" required>
+                        <option value="" disabled selected>-- Pilih Kelas --</option>
+                        <option value="6A">Kelas 6A</option>
+                        <option value="6B">Kelas 6B</option>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="nomorAbsen">5. Nomor Absen</label>
-                <select id="nomorAbsen" name="Nomor Absen" required>
-                    <option value="" disabled selected>-- Pilih Nomor Absen --</option>
-                    <script>
-                        for (let i = 1; i <= 38; i++) {
-                            document.write(`<option value="${i}">${i}</option>`);
-                        }
-                    </script>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="nomorAbsen">5. Nomor Absen</label>
+                    <select id="nomorAbsen" name="Nomor Absen" required>
+                        <option value="" disabled selected>-- Pilih Nomor Absen --</option>
+                        <script>
+                            for (let i = 1; i <= 38; i++) {
+                                document.write(`<option value="${i}">${i}</option>`);
+                            }
+                        </script>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="jenisKelamin">6. Jenis Kelamin</label>
-                <select id="jenisKelamin" name="Jenis Kelamin" required>
-                    <option value="" disabled selected>-- Pilih Jenis Kelamin --</option>
-                    <option value="Laki-laki">Laki-laki</option>
-                    <option value="Perempuan">Perempuan</option>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="jenisKelamin">6. Jenis Kelamin</label>
+                    <select id="jenisKelamin" name="Jenis Kelamin" required>
+                        <option value="" disabled selected>-- Pilih Jenis Kelamin --</option>
+                        <option value="Laki-laki">Laki-laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="agama">7. Agama</label>
-                <select id="agama" name="Agama" required>
-                    <option value="" disabled selected>-- Pilih Agama --</option>
-                    <option value="Hindu">Agama Hindu</option>
-                    <option value="Islam">Agama Islam</option>
-                    <option value="Budha">Agama Budha</option>
-                    <option value="Protestan">Agama Protestan</option>
-                    <option value="Katolik">Agama Katolik</option>
-                    <option value="Konghucu">Agama Konghucu</option>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="agama">7. Agama</label>
+                    <select id="agama" name="Agama" required>
+                        <option value="" disabled selected>-- Pilih Agama --</option>
+                        <option value="Hindu">Agama Hindu</option>
+                        <option value="Islam">Agama Islam</option>
+                        <option value="Budha">Agama Budha</option>
+                        <option value="Protestan">Agama Protestan</option>
+                        <option value="Katolik">Agama Katolik</option>
+                        <option value="Konghucu">Agama Konghucu</option>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="ttl">8. Tempat dan Tanggal Lahir</label>
-                <input type="text" id="ttl" name="Tempat dan Tanggal Lahir" placeholder="Contoh: Denpasar, 1 Januari 2013" required>
-            </div>
+                <div class="form-group">
+                    <label for="ttl">8. Tempat dan Tanggal Lahir</label>
+                    <input type="text" id="ttl" name="Tempat dan Tanggal Lahir" placeholder="Contoh: Denpasar, 1 Januari 2013" required>
+                </div>
 
-            <hr>
+                <hr>
 
-            <div class="form-group">
-                <label for="alamat">9. Alamat</label>
-                <textarea id="alamat" name="Alamat" required></textarea>
-                <div class="form-hint">Alamat sesuai dengan alamat pada Kartu Keluarga</div>
-            </div>
+                <div class="form-group">
+                    <label for="alamat">9. Alamat</label>
+                    <textarea id="alamat" name="Alamat" required></textarea>
+                    <div class="form-hint">Alamat sesuai dengan alamat pada Kartu Keluarga</div>
+                </div>
 
-            <div class="form-group">
-                <label for="kelurahan">10. Kelurahan</label>
-                <input type="text" id="kelurahan" name="Kelurahan" required>
-            </div>
+                <div class="form-group">
+                    <label for="kelurahan">10. Kelurahan</label>
+                    <input type="text" id="kelurahan" name="Kelurahan" required>
+                </div>
 
-            <div class="form-group">
-                <label for="kecamatan">11. Kecamatan</label>
-                <input type="text" id="kecamatan" name="Kecamatan" required>
-            </div>
+                <div class="form-group">
+                    <label for="kecamatan">11. Kecamatan</label>
+                    <input type="text" id="kecamatan" name="Kecamatan" required>
+                </div>
 
-            <div class="form-group">
-                <label for="kotaKabupaten">12. Kota/Kabupaten</label>
-                <input type="text" id="kotaKabupaten" name="Kota/Kabupaten" required>
-            </div>
+                <div class="form-group">
+                    <label for="kotaKabupaten">12. Kota/Kabupaten</label>
+                    <input type="text" id="kotaKabupaten" name="Kota/Kabupaten" required>
+                </div>
 
-            <div class="form-group">
-                <label for="provinsi">13. Provinsi</label>
-                <input type="text" id="provinsi" name="Provinsi" required>
-            </div>
+                <div class="form-group">
+                    <label for="provinsi">13. Provinsi</label>
+                    <input type="text" id="provinsi" name="Provinsi" required>
+                </div>
 
-            <hr>
+                <hr>
 
-            <div class="form-group">
-                <label for="namaAyah">14. Nama Ayah</label>
-                <input type="text" id="namaAyah" name="Nama Ayah" required>
-            </div>
-            <div class="form-group">
-                <label for="pendidikanAyah">15. Pendidikan Ayah</label>
-                <input type="text" id="pendidikanAyah" name="Pendidikan Ayah" required>
-            </div>
-            <div class="form-group">
-                <label for="pekerjaanAyah">16. Pekerjaan Ayah</label>
-                <input type="text" id="pekerjaanAyah" name="Pekerjaan Ayah" required>
-            </div>
+                <div class="form-group">
+                    <label for="namaAyah">14. Nama Ayah</label>
+                    <input type="text" id="namaAyah" name="Nama Ayah" required>
+                </div>
+                <div class="form-group">
+                    <label for="pendidikanAyah">15. Pendidikan Ayah</label>
+                    <input type="text" id="pendidikanAyah" name="Pendidikan Ayah" required>
+                </div>
+                <div class="form-group">
+                    <label for="pekerjaanAyah">16. Pekerjaan Ayah</label>
+                    <input type="text" id="pekerjaanAyah" name="Pekerjaan Ayah" required>
+                </div>
 
-            <div class="form-group">
-                <label for="namaIbu">17. Nama Ibu</label>
-                <input type="text" id="namaIbu" name="Nama Ibu" required>
-            </div>
-            <div class="form-group">
-                <label for="pendidikanIbu">18. Pendidikan Ibu</label>
-                <input type="text" id="pendidikanIbu" name="Pendidikan Ibu" required>
-            </div>
-            <div class="form-group">
-                <label for="pekerjaanIbu">19. Pekerjaan Ibu</label>
-                <input type="text" id="pekerjaanIbu" name="Pekerjaan Ibu" required>
-            </div>
+                <div class="form-group">
+                    <label for="namaIbu">17. Nama Ibu</label>
+                    <input type="text" id="namaIbu" name="Nama Ibu" required>
+                </div>
+                <div class="form-group">
+                    <label for="pendidikanIbu">18. Pendidikan Ibu</label>
+                    <input type="text" id="pendidikanIbu" name="Pendidikan Ibu" required>
+                </div>
+                <div class="form-group">
+                    <label for="pekerjaanIbu">19. Pekerjaan Ibu</label>
+                    <input type="text" id="pekerjaanIbu" name="Pekerjaan Ibu" required>
+                </div>
 
-            <hr>
+                <hr>
 
-            <div class="form-group">
-                <label for="tinggiBadan">20. Tinggi Badan (cm)</label>
-                <input type="number" id="tinggiBadan" name="Tinggi Badan" placeholder="Contoh: 145" required>
+                <div class="form-group">
+                    <label for="tinggiBadan">20. Tinggi Badan (cm)</label>
+                    <input type="number" id="tinggiBadan" name="Tinggi Badan" placeholder="Contoh: 145" required>
+                </div>
+                <div class="form-group">
+                    <label for="beratBadan">21. Berat Badan (kg)</label>
+                    <input type="number" id="beratBadan" name="Berat Badan" placeholder="Contoh: 40" required>
+                </div>
+                
+                <button type="submit" class="submit-button">Kirim Data</button>
+            </form>
+        </div>
+
+        <div id="thankYouMessage">
+            <div class="thank-you-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                </svg>
             </div>
-            <div class="form-group">
-                <label for="beratBadan">21. Berat Badan (kg)</label>
-                <input type="number" id="beratBadan" name="Berat Badan" placeholder="Contoh: 40" required>
-            </div>
-            
-            <button type="submit" class="submit-button">Kirim Data</button>
-        </form>
+            <h2>Data Berhasil Terkirim!</h2>
+            <p>
+                Kami mengucapkan terima kasih atas perhatian dan kerja sama Bapak/Ibu dalam melengkapi data anak. 🙏
+            </p>
+        </div>
+
     </div>
 
+    <script>
+        const formContainer = document.getElementById('form-container');
+        const form = document.getElementById('studentForm');
+        const thankYouMessage = document.getElementById('thankYouMessage');
+        const submitButton = form.querySelector('.submit-button');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Mencegah form mengirim data secara langsung
+
+            // Ubah teks tombol untuk memberi tahu user proses sedang berjalan
+            submitButton.disabled = true;
+            submitButton.textContent = 'Mengirim...';
+
+            const formData = new FormData(form);
+            const actionURL = form.getAttribute('action');
+
+            // Kirim data di belakang layar menggunakan Fetch API
+            fetch(actionURL, {
+                method: 'POST',
+                body: formData,
+            })
+            .then(() => {
+                // Jika berhasil, sembunyikan form dan tampilkan pesan terima kasih
+                formContainer.style.display = 'none';
+                thankYouMessage.style.display = 'block';
+            })
+            .catch((error) => {
+                // Jika ada error, tampilkan pesan kesalahan
+                console.error('Error!', error.message);
+                alert('Maaf, terjadi kesalahan saat mengirim data. Silakan coba lagi.');
+                
+                // Kembalikan tombol ke keadaan semula
+                submitButton.disabled = false;
+                submitButton.textContent = 'Kirim Data';
+            });
+        });
+    </script>
+
 </body>
-
 </html>
-
-
-
